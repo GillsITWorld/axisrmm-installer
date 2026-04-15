@@ -6,10 +6,11 @@ function Log($msg) { Write-Host "[AxisRMM] $msg" -ForegroundColor Cyan }
 
 # Try multiple download sources — first one that works determines backend
 $sources = @(
-    @{ base = "http://192.168.239.50:8772/portal";  backend = "http://192.168.239.50:8772" },
-    @{ base = "http://192.168.4.99:8099";            backend = "http://192.168.4.99:9000" },
-    @{ base = "http://192.168.4.99:9000/portal";    backend = "http://192.168.4.99:9000" },
-    @{ base = "https://rmm.gillsitworld.com/portal"; backend = "https://rmm.gillsitworld.com" }
+    @{ base = "http://192.168.239.50:8772/portal";  backend = "http://192.168.239.50:8772";  direct=$false },
+    @{ base = "http://192.168.4.99:8099";            backend = "http://192.168.4.99:9000";    direct=$false },
+    @{ base = "http://192.168.4.99:9000/portal";    backend = "http://192.168.4.99:9000";    direct=$false },
+    @{ base = "https://github.com/GillsITWorld/axisrmm-installer/releases/download/v2.0.0-dist13"; backend = "https://rmm.gillsitworld.com"; direct=$true },
+    @{ base = "https://rmm.gillsitworld.com/portal"; backend = "https://rmm.gillsitworld.com"; direct=$false }
 )
 
 # Download to ProgramData (not Temp) — AppLocker/BD Application Control
